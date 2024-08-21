@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import java.time.Duration;
 
 @ConfigurationProperties("app")
-@Validated//валидация для групповой проверки
+@Validated
 @Getter
 @Setter
 public class AppProperties {
