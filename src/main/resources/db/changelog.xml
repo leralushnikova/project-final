@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="/db/changelog/001_init_schema.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/002_create_project.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/003_create_mail_case.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/004_create_sprint.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/005_create_reference.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/006_create_users.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/007_create_profile.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/008_create_contact.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/009_create_task.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/010_create_activity.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/011_create_task_tag.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/012_create_user_belong.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/013_create_attachment.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/014_create_user_role.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/015_insert_reference.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/016_alter_sprint.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/017_alter_task.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/018_change_task_status_reference.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/019_users_add_on_delete_cascade.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/020_change_user_type_reference_and_refactor_reference_aux.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/021_change_UK_USER_BELONG.sql" relativeToChangelogFile="false"/>
+
+    <include file="/db/dev/022_insert_users.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/023_insert_user_role.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/024_insert_profile.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/025_insert_contact.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/026_insert_attachment.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/027_populate_tasks.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/028_insert_project.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/029_insert_sprint.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/030_insert_task.sql" relativeToChangelogFile="false"/>
+
+
+
+</databaseChangeLog>
