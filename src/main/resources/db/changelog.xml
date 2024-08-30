@@ -36,6 +36,8 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="/db/dev/028_insert_project.sql" relativeToChangelogFile="false"/>
     <include file="/db/dev/029_insert_sprint.sql" relativeToChangelogFile="false"/>
     <include file="/db/dev/030_insert_task.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/031_insert_activity.sql" relativeToChangelogFile="false"/>
+    <include file="/db/dev/032_insert_task_tag.sql" relativeToChangelogFile="false"/>
 
 
 
