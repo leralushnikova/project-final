@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,6 +33,10 @@ import static com.javarush.jira.ref.ReferenceService.getRefTo;
 public class TaskService {
     static final String CANNOT_ASSIGN = "Cannot assign as %s to task with status=%s";
     static final String CANNOT_UN_ASSIGN = "Cannot unassign as %s from task with status=%s";
+
+    public static final String IN_PROGRESS = "in_progress";
+    public static final String READY_FOR_REVIEW = "ready_for_review";
+    public static final String DONE = "done";
 
     private final Handlers.TaskExtHandler handler;
     private final Handlers.ActivityHandler activityHandler;
@@ -139,5 +144,43 @@ public class TaskService {
         if (!userType.equals(possibleUserType)) {
             throw new DataConflictException(String.format(assign ? CANNOT_ASSIGN : CANNOT_UN_ASSIGN, userType, task.getStatusCode()));
         }
+    }
+
+    public Duration calculateTaskInProgressDuration(long taskId) {
+        LocalDateTime fromProgress = null;
+        LocalDateTime ToReadyForReview = null;
+        List<Activity> activities = activityHandler.getRepository().findAllByTaskIdOrderByUpdatedDesc(taskId);
+        for(Activity activity : activities){
+            if(activity.getStatusCode() == null) continue;
+            if(activity.getStatusCode().equals(IN_PROGRESS)){
+                fromProgress =  activity.getUpdated();
+            }
+            if(activity.getStatusCode().equals(READY_FOR_REVIEW)){
+                ToReadyForReview = activity.getUpdated();
+            }
+        }
+        if(fromProgress != null && ToReadyForReview != null) {
+            return Duration.between(fromProgress, ToReadyForReview);
+        }
+        return Duration.ZERO;
+    }
+
+    public Duration calculateTaskInTestDuration(long taskId) {
+        LocalDateTime fromReadyForReview = null;
+        LocalDateTime toDone = null;
+        List<Activity> activities = activityHandler.getRepository().findAllByTaskIdOrderByUpdatedDesc(taskId);
+        for(Activity activity : activities){
+            if(activity.getStatusCode() == null) continue;
+            if(activity.getStatusCode().equals(READY_FOR_REVIEW)){
+                fromReadyForReview =  activity.getUpdated();
+            }
+            if(activity.getStatusCode().equals(DONE)){
+                toDone = activity.getUpdated();
+            }
+        }
+        if(fromReadyForReview != null && toDone != null) {
+            return Duration.between(fromReadyForReview, toDone);
+        }
+        return Duration.ZERO;
     }
 }

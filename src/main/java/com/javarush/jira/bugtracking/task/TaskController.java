@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,6 +47,19 @@ public class TaskController {
         log.info("get task by id={}", id);
         return taskService.get(id);
     }
+
+    @GetMapping("/durationProgress/{id}")
+    public Duration getDurationInProgress(@PathVariable long id) {
+        log.info("get task by id={} for time from in_progress to ready_for_review", id);
+        return taskService.calculateTaskInProgressDuration(id);
+    }
+
+    @GetMapping("/durationTest/{id}")
+    public Duration getDurationTest(@PathVariable long id) {
+        log.info("get task by id={} for time from ready_for_review to done", id);
+        return taskService.calculateTaskInTestDuration(id);
+    }
+
 
     @GetMapping("/by-sprint")
     public List<TaskTo> getAllBySprint(@RequestParam long sprintId) {
@@ -156,4 +170,6 @@ public class TaskController {
             this(taskTo, new LinkedList<>());
         }
     }
+
+
 }
